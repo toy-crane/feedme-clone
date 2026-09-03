@@ -25,6 +25,12 @@
       "skillPath": "skills/workflow/define-product/SKILL.md",
       "computedHash": "a7fba03cb0068fc814f5b051e421d31d3422c5d37ee7c44a8b10e1c83cdf1344"
     },
+    "defuddle": {
+      "source": "kepano/obsidian-skills",
+      "sourceType": "github",
+      "skillPath": "skills/defuddle/SKILL.md",
+      "computedHash": "0ed68bc3e818ba0e6b8d192357ea3daaf552a3893f8854e7fd43c06831f91323"
+    },
     "explain-visually": {
       "source": "toy-crane/skills",
       "sourceType": "github",

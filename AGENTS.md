@@ -8,6 +8,14 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
+# defuddle
+
+웹페이지 본문과 메타데이터 추출은 defuddle을 사용한다. 설치 버전은 `node_modules/defuddle/package.json`에서 확인한다.
+
+API와 옵션은 버전마다 달라지므로, defuddle을 다루는 작업을 시작할 때 공식 문서 <https://defuddle.md/docs>를 그때 조회하고 설치 버전과 대조한다. 문서 내용을 이 저장소에 복사해 두지 않는다. 저장소는 <https://github.com/kepano/defuddle>이다.
+
+서버에서는 `defuddle/node`의 `Defuddle(input, url, options)`를 쓴다. HTML 문자열을 그대로 받으므로 DOM 구현을 직접 준비할 필요가 없다.
+
 # 아키텍처 핵심 원칙
 
 모든 구조 판단은 아래 5가지를 기준으로 한다.
