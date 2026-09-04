@@ -44,7 +44,7 @@ export function ResultView({
           </h1>
           <div className="mt-2 flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm text-muted-foreground">
             {labels.map((label, index) => (
-              <Fragment key={label}>
+              <Fragment key={`${index}-${label}`}>
                 {index > 0 && <span aria-hidden>·</span>}
                 <span>{label}</span>
               </Fragment>

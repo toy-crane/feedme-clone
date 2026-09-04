@@ -61,4 +61,24 @@ describe("sourceLabels", () => {
     const labels = sourceLabels({ ...base, site: "React 공식 문서" })
     expect(labels).toEqual(["React 공식 문서", "react.dev"])
   })
+
+  it("저자와 사이트명이 같으면 한 번만 보여준다", () => {
+    const labels = sourceLabels({
+      ...base,
+      author: "Wikipedia",
+      site: "Wikipedia",
+      domain: "en.wikipedia.org",
+    })
+    expect(labels).toEqual(["Wikipedia", "en.wikipedia.org"])
+  })
+
+  it("대소문자만 다른 중복도 걸러낸다", () => {
+    const labels = sourceLabels({
+      ...base,
+      author: "MDN",
+      site: "mdn",
+      domain: "developer.mozilla.org",
+    })
+    expect(labels).toEqual(["MDN", "developer.mozilla.org"])
+  })
 })

@@ -29,18 +29,29 @@ export function toFileName(title: string): string {
   return `${safe || "document"}.md`
 }
 
-/** 사이트명이 도메인에 이미 담겨 있으면 같은 말을 두 번 보여주지 않는다. */
+/**
+ * 출처 표시. 사이트명이 도메인에 이미 담겨 있거나 저자와 겹치면 같은 말을
+ * 두 번 보여주지 않는다. 위키백과처럼 저자와 사이트명이 같은 문서가 있다.
+ */
 export function sourceLabels(result: ConversionSuccess): string[] {
-  const labels: string[] = []
-  if (result.author) labels.push(result.author)
-
   const site = result.site.trim()
   const domain = result.domain.trim()
   const siteIsInDomain =
     site !== "" && domain.toLowerCase().startsWith(site.toLowerCase())
-  if (site && !siteIsInDomain) labels.push(site)
-  if (domain) labels.push(domain)
 
-  if (result.published) labels.push(result.published)
+  const candidates = [
+    result.author,
+    siteIsInDomain ? "" : site,
+    domain,
+    result.published,
+  ]
+
+  const labels: string[] = []
+  for (const candidate of candidates) {
+    const value = candidate.trim()
+    if (!value) continue
+    if (labels.some((seen) => seen.toLowerCase() === value.toLowerCase())) continue
+    labels.push(value)
+  }
   return labels
 }
