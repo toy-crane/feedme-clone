@@ -1,0 +1,1 @@
+Editing the URL after a failed conversion doesn't reset `status`, so the previous attempt's destructive alert (`components/url-to-markdown/converter-form.tsx`) stays visible while the user types a new URL; only clicking "다시 시도" or resubmitting clears it.
