@@ -141,6 +141,20 @@ describe("Converter", () => {
     expect(screen.getByText("변환 결과가 여기에 나타납니다.")).toBeInTheDocument();
   });
 
+  it("변환 중에 지우기를 눌렀다면 늦게 도착한 결과는 화면에 나타나지 않는다", async () => {
+    let resolve!: (r: ConversionResult) => void;
+    convertUrl.mockReturnValue(new Promise((r) => (resolve = r)));
+    const user = await convert("https://defuddle.md/docs");
+
+    await user.click(screen.getByRole("button", { name: "입력 지우기" }));
+    resolve({ ok: true, article: ARTICLE });
+
+    await waitFor(() => expect(screen.getByRole("button", { name: "Markdown으로 변환" })).toBeEnabled());
+    expect(screen.queryByRole("article")).not.toBeInTheDocument();
+    expect(screen.getByLabelText("변환할 페이지 URL")).toHaveValue("");
+    expect(screen.getByText("변환 결과가 여기에 나타납니다.")).toBeInTheDocument();
+  });
+
   it("지우기 버튼은 오류도 지운다", async () => {
     const user = await convert("not a url");
     await user.click(screen.getByRole("button", { name: "입력 지우기" }));

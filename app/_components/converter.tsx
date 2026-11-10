@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -26,6 +26,8 @@ export function Converter() {
   const [invalid, setInvalid] = useState(false);
   const [view, setView] = useState<View>({ kind: "idle" });
   const [pending, startTransition] = useTransition();
+  // 지우기를 누르면 번호를 올려, 그 전에 시작한 변환의 늦은 응답을 버린다.
+  const generation = useRef(0);
 
   function handleValueChange(value: string) {
     setUrl(value);
@@ -39,8 +41,10 @@ export function Converter() {
       return;
     }
     setInvalid(false);
+    const started = generation.current;
     startTransition(async () => {
       const result = await convertUrl(url);
+      if (started !== generation.current) return;
       if (result.ok) setView((prev) => ({ kind: "result", article: result.article, id: (prev.kind === "result" ? prev.id : 0) + 1 }));
       else if (result.error.kind === "invalid-url") setInvalid(true);
       else setView({ kind: "error", error: result.error });
@@ -48,6 +52,7 @@ export function Converter() {
   }
 
   function handleClear() {
+    generation.current += 1;
     setUrl("");
     setInvalid(false);
     setView({ kind: "idle" });
