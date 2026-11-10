@@ -225,6 +225,14 @@
   .toast small { display: block; color: var(--muted-foreground); font-size: 12.5px; margin-top: 2px }
 
   @media (max-width: 560px) { .x {} }
+  .doc-head-row { display: flex; gap: 12px; align-items: flex-start; justify-content: space-between }
+  .icon-actions { display: flex; gap: 4px; flex: none }
+  .send-bar { position: sticky; bottom: 0; z-index: 4; border-top: 1px solid var(--border); background: var(--card);
+              border-radius: 0 0 var(--radius) var(--radius); padding: 12px 20px; display: flex; flex-direction: column; gap: 10px;
+              box-shadow: 0 -8px 20px rgb(0 0 0 / .06) }
+  .send-bar .row { justify-content: space-between }
+  .sh-vp-390 .send-bar { padding: 12px 16px }
+  .toast { bottom: 140px }
   .sh-vp-390 .hero h1 { font-size: 22px }
   .sh-vp-390 .url-form { flex-direction: column }
   .sh-vp-390 .url-form > .btn { width: 100% }
@@ -306,39 +314,19 @@
 
       <!-- 결과 -->
       <article class="card" data-when="결과,결과(긴 글)" data-component="Card">
-        <header class="doc-head">
+        <header class="doc-head"><div class="doc-head-row"><div>
           <h2 class="doc-title" data-when="결과">Defuddle: 웹 페이지에서 본문만 깔끔하게 뽑아내기</h2>
           <h2 class="doc-title" data-when="결과(긴 글)">How to Do Great Work</h2>
           <div class="doc-meta" data-when="결과"><span>kepano</span><span>defuddle.md</span><span>1,352 단어</span></div>
           <div class="doc-meta" data-when="결과(긴 글)"><span>paulgraham.com</span><span>11,941 단어</span></div>
-        </header>
-
-        <div class="export" data-component="new:ExportPanel">
-          <div class="row">
-            <button class="btn btn-outline btn-sm" id="copy" data-component="Button">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              <span>Markdown 복사</span></button>
-            <button class="btn btn-outline btn-sm" id="download" data-component="Button">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-              <span>.md 다운로드</span></button>
           </div>
-          <div style="display:flex;flex-direction:column;gap:8px">
-            <span class="label">LLM에게 보낼 프롬프트 <span style="font-weight:400">(선택)</span></span>
-            <div class="chips" role="group" aria-label="프롬프트" data-component="ToggleGroup">
-              <button class="chip" aria-pressed="false" data-prompt="요약해줘">요약해줘</button>
-              <button class="chip" aria-pressed="false" data-prompt="한국어로 번역해줘">한국어로 번역해줘</button>
-              <button class="chip" aria-pressed="false" data-prompt="쉽게 설명해줘">쉽게 설명해줘</button>
-              <button class="chip" aria-pressed="false" data-prompt="__custom">직접 입력</button>
-            </div>
-            <input class="input custom-input" id="customPrompt" data-component="Input" placeholder="예: 핵심 주장 3개와 반론을 정리해줘" hidden aria-label="직접 입력한 프롬프트">
+          <div class="icon-actions">
+            <button class="btn btn-outline btn-icon" id="copy" data-component="Button" aria-label="Markdown 복사" title="Markdown 복사">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+            <button class="btn btn-outline btn-icon" id="download" data-component="Button" aria-label=".md 다운로드" title=".md 다운로드">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></button>
           </div>
-          <div class="row llm-row">
-            <button class="btn btn-primary btn-sm" data-open="ChatGPT" data-component="Button">ChatGPT로 열기
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-            <button class="btn btn-primary btn-sm" data-open="Claude" data-component="Button">Claude로 열기
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
-          </div>
-        </div>
+        </div></header>
 
         <div class="md" data-when="결과" data-component="new:MarkdownView">
           <h2>Installation</h2>
@@ -358,7 +346,28 @@
           <p>The following recipe assumes you're very ambitious.</p>
           <h2>The first step</h2>
           <p>The first step is to decide what to work on. The work you choose needs to have three qualities: it has to be something you have a natural aptitude for, that you have a deep interest in, and that offers scope to do great work.</p>
+          <p>In practice you don't have to worry much about the third criterion. Ambitious people are if anything already too conservative about it. So all you need to do is find something you have an aptitude for and great interest in.</p>
+          <p>That sounds straightforward, but it's often quite difficult. When you're young you don't know what you're good at or what different kinds of work are like. Some kinds of work you end up doing may not even exist yet.</p>
+          <h2>Curiosity</h2>
+          <p>Develop a habit of working on your own projects. Don't let "work" mean something other people tell you to do. If you do manage to do great work one day, it will probably be on a project of your own.</p>
+          <p>Once you've found something you're excessively interested in, the next step is to learn enough about it to get you to one of the frontiers of knowledge.</p>
           <p style="color:var(--muted-foreground)">… (본문 약 68,000자 계속)</p>
+        </div>
+
+        <div class="send-bar" data-component="new:SendBar">
+            <div class="chips" role="group" aria-label="프롬프트" data-component="ToggleGroup">
+              <button class="chip" aria-pressed="false" data-prompt="요약해줘">요약해줘</button>
+              <button class="chip" aria-pressed="false" data-prompt="한국어로 번역해줘">한국어로 번역해줘</button>
+              <button class="chip" aria-pressed="false" data-prompt="쉽게 설명해줘">쉽게 설명해줘</button>
+              <button class="chip" aria-pressed="false" data-prompt="__custom">직접 입력</button>
+            </div>
+            <input class="input custom-input" id="customPrompt" data-component="Input" placeholder="예: 핵심 주장 3개와 반론을 정리해줘" hidden aria-label="직접 입력한 프롬프트">
+          <div class="row llm-row">
+            <button class="btn btn-primary btn-sm" data-open="ChatGPT" data-component="Button">ChatGPT로 열기
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
+            <button class="btn btn-primary btn-sm" data-open="Claude" data-component="Button">Claude로 열기
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M8 7h9v9"/></svg></button>
+          </div>
         </div>
       </article>
 
