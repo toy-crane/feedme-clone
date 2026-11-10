@@ -1,0 +1,4 @@
+interface:
+  display_name: "TDD"
+  short_description: "Write tests before the behavior and see each fail first"
+  default_prompt: "Use $tdd to implement this change: write the tests before the behavior, see each fail on an assertion, then implement."
