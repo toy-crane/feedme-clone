@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Converter } from "@/components/converter/converter";
 import { ThemeToggle } from "@/components/converter/theme-toggle";
 
@@ -11,7 +13,12 @@ export default function Home() {
           </span>
           Feedme
         </div>
-        <ThemeToggle />
+        <div className="flex items-center gap-2">
+          <Link href="/settings" className="text-sm text-muted-foreground underline-offset-4 hover:underline">
+            설정
+          </Link>
+          <ThemeToggle />
+        </div>
       </header>
       <Converter />
     </main>
