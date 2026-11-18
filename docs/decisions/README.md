@@ -4,3 +4,5 @@
 
 - [ui-composition](ui-composition.md) — Read when choosing UI components, page composition, visual tokens, or custom interface boundaries.
 - [dependency-versions](dependency-versions.md) — Read when upgrading dependencies, pinning versions, or wondering why TypeScript stays on 6.x.
+- [page-conversion](page-conversion.md) — Read when changing how pages are fetched, which URLs are allowed, or how `defuddle` extracts Markdown.
+- [llm-handoff](llm-handoff.md) — Read when changing how results open in ChatGPT or Claude, or what the prompt attaches to.
